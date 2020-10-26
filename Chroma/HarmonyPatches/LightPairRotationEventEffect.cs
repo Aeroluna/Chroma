@@ -71,6 +71,8 @@
 
                 float precisionSpeed = ((float?)Trees.at(dynData, "_preciseSpeed")).GetValueOrDefault(beatmapEventData.value);
 
+                float? startPosition = (float?)Trees.at(dynData, "_startPosition");
+
                 int? dir = (int?)Trees.at(dynData, "_direction");
                 dir = dir.GetValueOrDefault(-1);
 
@@ -90,10 +92,18 @@
                 Quaternion startRotation = (Quaternion)_rotationDataType.GetField("startRotation").GetValue(rotationData);
                 float startRotationAngle = (float)_rotationDataType.GetField("startRotationAngle").GetValue(rotationData);
                 Vector3 rotationVector = __instance.GetField<Vector3, LightPairRotationEventEffect>("_rotationVector");
+
+                if (startPosition.HasValue)
+                {
+                    float rotationAngle = (isLeftEvent ? startPosition.Value : -startPosition.Value) + startRotationAngle;
+                    _rotationDataType.GetField("rotationAngle").SetValue(rotationData, rotationAngle);
+                    transform.localRotation = startRotation * Quaternion.Euler(rotationVector * rotationAngle);
+                }
+
                 if (beatmapEventData.value == 0)
                 {
                     _rotationDataType.GetField("enabled").SetValue(rotationData, false);
-                    if (!lockPosition)
+                    if (!lockPosition && !startPosition.HasValue)
                     {
                         _rotationDataType.GetField("rotationAngle").SetValue(rotationData, startRotationAngle);
                         transform.localRotation = startRotation * Quaternion.Euler(rotationVector * startRotationAngle);
@@ -103,7 +113,7 @@
                 {
                     _rotationDataType.GetField("enabled").SetValue(rotationData, true);
                     _rotationDataType.GetField("rotationSpeed").SetValue(rotationData, precisionSpeed * 20f * direction);
-                    if (!lockPosition)
+                    if (!lockPosition && !startPosition.HasValue)
                     {
                         float rotationAngle = startRotationOffset + startRotationAngle;
                         _rotationDataType.GetField("rotationAngle").SetValue(rotationData, rotationAngle);

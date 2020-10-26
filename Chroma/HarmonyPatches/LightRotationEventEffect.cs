@@ -30,6 +30,8 @@
 
                     float precisionSpeed = ((float?)Trees.at(dynData, "_preciseSpeed")).GetValueOrDefault(beatmapEventData.value);
 
+                    float? startPosition = (float?)Trees.at(dynData, "_startPosition");
+
                     int? dir = (int?)Trees.at(dynData, "_direction");
                     dir = dir.GetValueOrDefault(-1);
 
@@ -45,11 +47,17 @@
                             break;
                     }
 
+                    if (startPosition.HasValue)
+                    {
+                        __instance.transform.localRotation = ____startRotation;
+                        __instance.transform.Rotate(____rotationVector, isLeftEvent ? startPosition.Value : -startPosition.Value, Space.Self);
+                    }
+
                     // Actual lasering
                     if (beatmapEventData.value == 0)
                     {
                         __instance.enabled = false;
-                        if (!lockPosition)
+                        if (!lockPosition && !startPosition.HasValue)
                         {
                             __instance.transform.localRotation = ____startRotation;
                         }
@@ -58,7 +66,7 @@
                     {
                         __instance.enabled = true;
                         ____rotationSpeed = precisionSpeed * 20f * direction;
-                        if (!lockPosition)
+                        if (!lockPosition && !startPosition.HasValue)
                         {
                             __instance.transform.localRotation = ____startRotation;
                             __instance.transform.Rotate(____rotationVector, Random.Range(0f, 180f), Space.Self);
