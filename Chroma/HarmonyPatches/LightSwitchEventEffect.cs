@@ -36,7 +36,7 @@
                 IEnumerable<int> newIds = LightColorManager.LightIDOverride.Select(n => LightIDTableManager.GetActiveTableValue(type, n) ?? n);
                 foreach (int id in newIds)
                 {
-                    if (lights[id].isRegistered)
+                    if (id >= 0 && lights.Count > id && lights[id].isRegistered)
                     {
                         lights[id].ColorWasSet(color);
                     }
