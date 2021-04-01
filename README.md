@@ -36,6 +36,10 @@ Example of _customData:
      *  `"_rotation"`: `[x, y, z]` (float) Sets rotation of GameObject.
      *  `"_localRotation"`: `[x, y, z]` (float) Sets localRotation of GameObject.
      *  `"_track"`: (string) For use with Noodle Extensions.
+* Track Lane Rings
+  * `"_customData"` -> `"_trackLaneRingModifiers"`
+    * `"_ringCount"`: (int) Sets the amount of rings in each ring set.
+    * `"_ringPositionStep"`: (float) Sets the distance between the rings in each ring set. This modifier will have no effect on ring step events.
 
 ## Color Data
 * RGB
