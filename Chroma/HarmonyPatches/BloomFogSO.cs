@@ -6,7 +6,7 @@
     {
         private static void Prefix(BloomFogSO __instance)
         {
-            ChromaFogManager.bloomFogSO = __instance;
+            ChromaFogManager.BloomFogSO = __instance;
         }
     }
 }
