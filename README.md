@@ -105,9 +105,9 @@ Allows you to [control the in-game fog](https://cdn.discordapp.com/attachments/5
 
 * **Fog Settings** object (used throughout)
   * `"_attenuation"`: (float) Controls the strength of the fog. A higher number leads to a darker environment. Values close to 0 are recommended. Default is `0.01`
-  * `"_offset": (float) Controls the fog distance to the player. Default is `0`.
-  * `"_fogFloor": (float) Any solid lasers beneath this Y value will be transparent. Default is `-300`.
-  * `"_fogHeight": (float) Controls the distance from the fog floor where solid lasers will fade into transparency.
+  * `"_offset"`: (float) Controls the fog distance to the player. Default is `0`.
+  * `"_fogFloor"`: (float) Any solid lasers beneath this Y value will be transparent. Default is `-300`.
+  * `"_fogHeight"`: (float) Controls the distance from the fog floor where solid lasers will fade into transparency. Default is `10`.
 
 * Per-level Fog Settings
   * `Info.dat` -> Difficulty -> `"_customData"`
