@@ -114,10 +114,10 @@ Allows you to [control the in-game fog](https://cdn.discordapp.com/attachments/5
     * `"_fogSettings"`: (Fog Settings) Controls the initial fog settings for the difficulty.
 
 * [Custom Event](https://github.com/Aeroluna/NoodleExtensions/blob/master/Documentation/AnimationDocs.md#custom-events) Types
-  * `"_events"` -> `"_customData"` -> `"_customEvents"`
+  * `Difficulty.dat` -> `"_customData"` -> `"_customEvents"`
     * `"SetFogSettings"` - Instantly sets fog settings. `"_data"` is a Fog Settings object.
     * `"ResetFogSettings"` - Resets fog to the settings used by the environment. Data is not required.
-    * `"AnimateFogSettings"` - Animates between the currently active settings, and the provided settings
+    * `"AnimateFogSettings"` - Animates between the currently active settings, and the provided settings.
       * `"_newFogSettings"`: (Fog Settings) The new settings.
       * `"_duration"`: (float) The duration of the transition period. Default is `1`.
       * `"_easing"`: (Function) An additional function that controls transition easing. See [easings.net](https://easings.net/) for a list of all available easings. Default is `easeLinear`.
