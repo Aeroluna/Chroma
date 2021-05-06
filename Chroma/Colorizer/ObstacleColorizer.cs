@@ -28,7 +28,7 @@
             OCColorManager.GetOCColorManager(oc)?.SetObstacleColor(color);
         }
 
-        public static void SetAllObstacleColors(Color color)
+        public static void SetAllObstacleColors(Color? color)
         {
             OCColorManager.SetGlobalObstacleColor(color);
         }
@@ -112,7 +112,7 @@
                 return occm;
             }
 
-            internal static void SetGlobalObstacleColor(Color color)
+            internal static void SetGlobalObstacleColor(Color? color)
             {
                 _globalColor = color;
             }
@@ -134,7 +134,7 @@
 
             internal void SetActiveColors()
             {
-                Color finalColor = _color ?? _globalColor ?? _color_Original;
+                Color finalColor = _globalColor ?? _color ?? _color_Original;
                 ParametricBoxFrameController obstacleFrame = _obstacleFrameAccessor(ref _stretchableObstacle);
 
                 if (finalColor == obstacleFrame.color)
