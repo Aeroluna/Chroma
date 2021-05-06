@@ -121,6 +121,8 @@
             {
                 if (beatmapData is CustomBeatmapData customBeatmap)
                 {
+                    SpawnRotationChevronSetLightAmount.UseChevronAlpha = (bool?)CustomJSONData.Trees.at(customBeatmap.beatmapCustomData, ALLOWCHEVRONALPHA) ?? false;
+
                     if (ChromaConfig.Instance.EnvironmentEnhancementsEnabled)
                     {
                         EnvironmentEnhancementManager.Init(customBeatmap, beatmapObjectSpawnController.noteLinesDistance);
