@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="HarmonyPatches\BloomFogSO.cs" />
     <Compile Include="HarmonyPatches\GameplayCoreInstaller.cs" />
     <Compile Include="HarmonyPatches\PlayerHeadAndObstacleInteraction.cs" />
     <Compile Include="HarmonyPatches\ScenesTransition\TutorialScenesTransitionSetupDataSO.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="ChromaObjectData.cs" />
     <Compile Include="ChromaPatch.cs" />
     <Compile Include="HarmonyPatches\BeatmapDataZenModeTransform.cs" />
+    <Compile Include="Lighting\ChromaFogManager.cs" />
     <Compile Include="Lighting\ChromaGradientController.cs" />
     <Compile Include="Lighting\ChromaRingsRotationEffect.cs" />
     <Compile Include="HarmonyPatches\BeatmapDataTransformHelper.cs" />

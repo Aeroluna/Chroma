@@ -100,6 +100,28 @@ Example of _customData:
 ## Animation
 See [Noodle Extensions documentation](https://github.com/Aeroluna/NoodleExtensions/blob/master/Documentation/AnimationDocs.md#_color)
 
+## Fog
+Allows you to [control the in-game fog](https://cdn.discordapp.com/attachments/587440801546502175/839749737670639626/unknown.png). This does *not* affect particles, or the smoke around the environment.
+
+* **Fog Settings** object (used throughout)
+  * `"_attenuation"`: (float) Controls the strength of the fog. A higher number leads to a darker environment. Values close to 0 are recommended. Default is `0.01`
+  * `"_offset"`: (float) Controls the fog distance to the player. Default is `0`.
+  * `"_fogFloor"`: (float) Any solid lasers beneath this Y value will be transparent. Default is `-300`.
+  * `"_fogHeight"`: (float) Controls the distance from the fog floor where solid lasers will fade into transparency. Default is `10`.
+
+* Per-level Fog Settings
+  * `Info.dat` -> Difficulty -> `"_customData"`
+    * `"_fogSettings"`: (Fog Settings) Controls the initial fog settings for the difficulty.
+
+* [Custom Event](https://github.com/Aeroluna/NoodleExtensions/blob/master/Documentation/AnimationDocs.md#custom-events) Types
+  * `Difficulty.dat` -> `"_customData"` -> `"_customEvents"`
+    * `"SetFogSettings"` - Instantly sets fog settings. `"_data"` is a Fog Settings object.
+    * `"ResetFogSettings"` - Resets fog to the settings used by the environment. Data is not required.
+    * `"AnimateFogSettings"` - Animates between the currently active settings, and the provided settings.
+      * `"_newFogSettings"`: (Fog Settings) The new settings.
+      * `"_duration"`: (float) The duration of the transition period. Default is `1`.
+      * `"_easing"`: (Function) An additional function that controls transition easing. See [easings.net](https://easings.net/) for a list of all available easings. Default is `easeLinear`.
+
 ## Info.dat Data
 * Environment Removal
   * DEPRECATED use _environment.

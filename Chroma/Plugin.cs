@@ -54,6 +54,16 @@
         internal const string OBJECTROTATION = "_rotation";
         internal const string LOCALROTATION = "_localRotation";
 
+        internal const string SETFOGSETTINGS = "SetFogSettings";
+        internal const string ANIMATEFOGSETTINGS = "AnimateFogSettings";
+        internal const string RESETFOGSETTINGS = "ResetFogSettings";
+        internal const string FOGSETTINGS = "_fogSettings";
+        internal const string NEWFOGSETTINGS = "_newFogSettings";
+        internal const string ATTENUATION = "_attenuation";
+        internal const string OFFSET = "_offset";
+        internal const string FOGFLOOR = "_fogFloor";
+        internal const string FOGHEIGHT = "_fogHeight";
+
         internal static readonly Harmony _harmonyInstanceCore = new Harmony(HARMONYIDCORE);
         internal static readonly Harmony _harmonyInstance = new Harmony(HARMONYID);
 

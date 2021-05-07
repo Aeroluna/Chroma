@@ -8,6 +8,7 @@
     using Chroma.Colorizer;
     using Chroma.HarmonyPatches;
     using Chroma.Settings;
+    using CustomJSONData;
     using CustomJSONData.CustomBeatmap;
     using HarmonyLib;
     using IPA.Utilities;
@@ -125,6 +126,8 @@
                     {
                         EnvironmentEnhancementManager.Init(customBeatmap, beatmapObjectSpawnController.noteLinesDistance);
                     }
+
+                    ChromaFogManager.Initialize(coreSetup.GetComponent<CustomEventCallbackController>(), customBeatmap);
                 }
 
                 // please let me kill legacy
