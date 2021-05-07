@@ -54,6 +54,8 @@
         internal const string OBJECTROTATION = "_rotation";
         internal const string LOCALROTATION = "_localRotation";
 
+        internal const string ALLOWCHEVRONALPHA = "_allowChevronAlpha";
+
         internal static readonly Harmony _harmonyInstanceCore = new Harmony(HARMONYIDCORE);
         internal static readonly Harmony _harmonyInstance = new Harmony(HARMONYID);
 

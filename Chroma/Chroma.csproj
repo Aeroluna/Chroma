@@ -46,6 +46,7 @@
     <Compile Include="HarmonyPatches\GameplayCoreInstaller.cs" />
     <Compile Include="HarmonyPatches\PlayerHeadAndObstacleInteraction.cs" />
     <Compile Include="HarmonyPatches\ScenesTransition\TutorialScenesTransitionSetupDataSO.cs" />
+    <Compile Include="HarmonyPatches\SpawnRotationChevron.cs" />
     <Compile Include="HarmonyPatches\TrackLaneRing.cs" />
     <Compile Include="HarmonyPatches\LightWithIdManager.cs" />
     <Compile Include="HarmonyPatches\TrackLaneRingsManager.cs" />
