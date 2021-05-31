@@ -8,11 +8,11 @@
     internal static class MirroredCubeNoteControllerMirror
     {
         [HarmonyPriority(Priority.Low)]
-        private static void Prefix(ICubeNoteMirrorable iCubeNoteMirrorable)
+        private static void Prefix(ICubeNoteMirrorable noteController)
         {
-            if (iCubeNoteMirrorable is NoteController noteController)
+            if (noteController is NoteController noteControllerBase)
             {
-                NoteColorizer.EnableNoteColorOverride(noteController);
+                NoteColorizer.EnableNoteColorOverride(noteControllerBase);
             }
         }
 

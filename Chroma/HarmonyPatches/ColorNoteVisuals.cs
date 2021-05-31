@@ -38,7 +38,7 @@
     [HeckPatch("HandleNoteControllerDidInit")]
     internal static class ColorNoteVisualsHandleNoteControllerDidInit
     {
-        private static readonly FieldInfo followedNote = typeof(MirroredCubeNoteController).GetField("followedNote");
+        private static readonly FieldInfo followedNote = typeof(MirroredCubeNoteController).GetField("followedNote", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private static void Prefix(NoteControllerBase noteController)
         {
