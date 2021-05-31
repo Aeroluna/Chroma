@@ -1,5 +1,6 @@
 ﻿namespace Chroma.HarmonyPatches
 {
+    using System.Reflection;
     using Chroma.Colorizer;
     using HarmonyLib;
     using Heck;
@@ -37,10 +38,37 @@
     [HeckPatch("HandleNoteControllerDidInit")]
     internal static class ColorNoteVisualsHandleNoteControllerDidInit
     {
-        private static void Prefix(NoteController noteController)
+        private static readonly FieldInfo followedNote = typeof(MirroredCubeNoteController).GetField("followedNote");
+
+        private static void Prefix(NoteControllerBase noteController)
         {
             ChromaNoteData chromaData = TryGetObjectData<ChromaNoteData>(noteController.noteData);
             if (chromaData == null)
+            {
+                return;
+            }
+
+            NoteController affectedNoteController = null;
+
+            switch (noteController)
+            {
+                case MirroredCubeNoteController mirroredCubeNoteController:
+                {
+                    ICubeNoteMirrorable mirrorable = (ICubeNoteMirrorable)followedNote.GetValue(mirroredCubeNoteController);
+                    if (mirrorable is GameNoteController noteMirrorable)
+                    {
+                        affectedNoteController = noteMirrorable;
+                    }
+
+                    break;
+                }
+
+                case NoteController nc:
+                    affectedNoteController = nc;
+                    break;
+            }
+
+            if (noteController == null)
             {
                 return;
             }
@@ -49,11 +77,11 @@
 
             if (color.HasValue)
             {
-                noteController.SetNoteColors(color.Value, color.Value);
+                affectedNoteController.SetNoteColors(color.Value, color.Value);
             }
             else
             {
-                noteController.Reset();
+                affectedNoteController.Reset();
             }
         }
     }
