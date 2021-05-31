@@ -1,4 +1,6 @@
-﻿namespace Chroma.HarmonyPatches
+﻿using System;
+
+namespace Chroma.HarmonyPatches
 {
     using Chroma.Colorizer;
     using HarmonyLib;
@@ -12,7 +14,14 @@
         {
             if (type == ColorType.ColorA || type == ColorType.ColorB)
             {
-                Color? color = NoteColorizer.NoteColorOverride[(int)type];
+                Color? color = null;
+                if (NoteColorizer.NoteColorOverride.Count > 0)
+                {
+                    var (item1, item2) = NoteColorizer.NoteColorOverride.Peek();
+
+                    color = type == ColorType.ColorA ? item1 : item2;
+                }
+
                 if (color.HasValue)
                 {
                     __result = color.Value;

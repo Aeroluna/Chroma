@@ -1,4 +1,6 @@
-﻿namespace Chroma.Colorizer
+﻿using System;
+
+namespace Chroma.Colorizer
 {
     using System.Collections.Generic;
     using IPA.Utilities;
@@ -10,7 +12,7 @@
     {
         private static readonly Dictionary<NoteController, CNVColorManager> _cnvColorManagers = new Dictionary<NoteController, CNVColorManager>();
 
-        internal static Color?[] NoteColorOverride { get; } = new Color?[2] { null, null };
+        internal static Stack<Tuple<Color?, Color?>> NoteColorOverride { get; } = new Stack<Tuple<Color?, Color?>>();
 
         public static void Reset(this NoteController nc)
         {
@@ -66,15 +68,21 @@
             ChromaNoteData chromaData = TryGetObjectData<ChromaNoteData>(noteController.noteData);
             if (chromaData != null)
             {
-                NoteColorOverride[0] = chromaData.InternalColor ?? CNVColorManager.GlobalColor[0];
-                NoteColorOverride[1] = chromaData.InternalColor ?? CNVColorManager.GlobalColor[1];
+                NoteColorOverride.Push(new Tuple<Color?, Color?>(
+                    chromaData.InternalColor ?? CNVColorManager.GlobalColor[0],
+                    chromaData.InternalColor ?? CNVColorManager.GlobalColor[1]));
             }
         }
 
+
         internal static void DisableNoteColorOverride()
         {
-            NoteColorOverride[0] = null;
-            NoteColorOverride[1] = null;
+            if (NoteColorOverride.Count == 0)
+            {
+                return;
+            }
+
+            NoteColorOverride.Pop();
         }
 
         internal static void ColorizeSaber(NoteController noteController, in NoteCutInfo noteCutInfo)
