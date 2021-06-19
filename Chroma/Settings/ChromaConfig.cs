@@ -19,6 +19,8 @@
 
         public bool EnvironmentEnhancementsEnabled { get; set; } = true;
 
+        public bool EnvironmentOverrideEnabled { get; set; } = true;
+
         public bool ForceZenWallsEnabled { get; set; } = false;
 
         public bool PrintEnvironmentEnhancementDebug { get; set; } = false;

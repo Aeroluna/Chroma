@@ -19,6 +19,13 @@
             set => ChromaConfig.Instance.EnvironmentEnhancementsEnabled = !value;
         }
 
+        [UIValue("environment")]
+        public bool EnvironmentOverrideEnabled
+        {
+            get => !ChromaConfig.Instance.EnvironmentOverrideEnabled;
+            set => ChromaConfig.Instance.EnvironmentOverrideEnabled = !value;
+        }
+
         [UIValue("zenwalls")]
         public bool ForceZenWallsEnabled
         {

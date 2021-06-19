@@ -45,16 +45,24 @@
             }
         }
 
-        internal static void Patch(IDifficultyBeatmap difficultyBeatmap, ref OverrideEnvironmentSettings overrideEnvironmentSettings)
+        internal static void Patch(IDifficultyBeatmap difficultyBeatmap, ref OverrideEnvironmentSettings overrideEnvironmentSettings, ref ColorScheme overrideColorScheme)
         {
             if (difficultyBeatmap.beatmapData is CustomBeatmapData customBeatmapData)
             {
                 bool chromaRequirement = BasicPatch(customBeatmapData);
-                if (chromaRequirement &&
-                    ChromaConfig.Instance.EnvironmentEnhancementsEnabled &&
-                    (Trees.at(customBeatmapData.beatmapCustomData, Chroma.Plugin.ENVIRONMENTREMOVAL) != null || Trees.at(customBeatmapData.customData, Chroma.Plugin.ENVIRONMENT) != null))
+                if (chromaRequirement)
                 {
-                    overrideEnvironmentSettings = null;
+                    if (!ChromaConfig.Instance.EnvironmentOverrideEnabled)
+                    {
+                        overrideColorScheme = difficultyBeatmap.GetEnvironmentInfo().colorScheme.colorScheme;
+                        return;
+                    }
+
+                    if (ChromaConfig.Instance.EnvironmentEnhancementsEnabled &&
+                        (Trees.at(customBeatmapData.beatmapCustomData, Chroma.Plugin.ENVIRONMENTREMOVAL) != null || Trees.at(customBeatmapData.customData, Chroma.Plugin.ENVIRONMENT) != null))
+                    {
+                        overrideEnvironmentSettings = null;
+                    }
                 }
             }
         }
